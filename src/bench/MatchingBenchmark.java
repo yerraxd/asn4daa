@@ -61,7 +61,7 @@ public class MatchingBenchmark {
             }
         }
 
-        writeCsv(Paths.get("results", "matching_results.csv"), csvRows);
+        writeCsv(Paths.get("results", "tables", "matching_results.csv"), csvRows);
     }
 
     private static List<Scenario> buildScenarios() {

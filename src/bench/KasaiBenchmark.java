@@ -60,7 +60,7 @@ public class KasaiBenchmark {
                     s.name(), n, ms, comparisons));
         }
 
-        writeCsv(Paths.get("results", "kasai_results.csv"), csvRows);
+        writeCsv(Paths.get("results", "tables", "kasai_results.csv"), csvRows);
     }
 
     private static void warmUp() {

@@ -43,7 +43,7 @@ public class DpBenchmark {
         }
 
         printTable(lcsMs, editMs, lcsValue, editValue);
-        writeCsv(Paths.get("results", "dp_results.csv"), lcsMs, editMs, lcsValue, editValue);
+        writeCsv(Paths.get("results", "tables", "dp_results.csv"), lcsMs, editMs, lcsValue, editValue);
     }
 
     private static void warmUp() {
