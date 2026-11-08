@@ -33,6 +33,9 @@ public class MatcherTests {
         check("pattern equals text", "ABC", "ABC", List.of(0));
         check("single characters", "A", "A", List.of(0));
         randomCrossCheck();
+        check("empty pattern", "ABC", "", List.of());
+        check("empty text and empty pattern", "", "", List.of());
+        check("empty text, non-empty pattern", "", "A", List.of());
     }
     private static String randomString(Random rnd, int length, String alphabet) {
         StringBuilder sb = new StringBuilder();

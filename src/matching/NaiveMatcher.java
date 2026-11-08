@@ -8,6 +8,9 @@ public class NaiveMatcher implements StringMatcher {
     @Override
     public List<Integer> search(String text, String pattern) {
         List<Integer> result = new ArrayList<>();
+        if (pattern.isEmpty()) {
+            return result;
+        }
         int n = text.length();
         int m = pattern.length();
 

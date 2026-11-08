@@ -24,7 +24,7 @@ public class RabinKarpMatcher implements StringMatcher {
         List<Integer> result = new ArrayList<>();
         int n = text.length();
         int m = pattern.length();
-        if (m > n) {
+        if (m == 0 || m > n) {
             return result;
         }
         long pow = 1;
