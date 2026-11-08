@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KMPMatcher implements StringMatcher {
+    private long comparisons;
     public static int[] buildLps(String p) {
         int m = p.length();
         int[] lps = new int[m];
@@ -27,6 +28,7 @@ public class KMPMatcher implements StringMatcher {
 
     @Override
     public List<Integer> search(String text, String pattern) {
+        comparisons = 0;
         List<Integer> result = new ArrayList<>();
         if (pattern.isEmpty()) {
             return result;
@@ -38,6 +40,7 @@ public class KMPMatcher implements StringMatcher {
         int i = 0;
         int j = 0;
         while (i < n) {
+            comparisons++;
             if (text.charAt(i) == pattern.charAt(j)) {
                 i++;
                 j++;
@@ -52,5 +55,10 @@ public class KMPMatcher implements StringMatcher {
             }
         }
         return result;
+    }
+
+    @Override
+    public long getComparisons() {
+        return comparisons;
     }
 }

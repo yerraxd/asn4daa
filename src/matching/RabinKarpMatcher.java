@@ -6,6 +6,8 @@ import java.util.List;
 public class RabinKarpMatcher implements StringMatcher {
     private final long base;
     private final long mod;
+    private long comparisons;
+    private long spuriousHits;
 
     public RabinKarpMatcher() {
         this(256, 1_000_000_007L);
@@ -21,12 +23,15 @@ public class RabinKarpMatcher implements StringMatcher {
 
     @Override
     public List<Integer> search(String text, String pattern) {
+        comparisons = 0;
+        spuriousHits = 0;
         List<Integer> result = new ArrayList<>();
         int n = text.length();
         int m = pattern.length();
         if (m == 0 || m > n) {
             return result;
         }
+
         long pow = 1;
         for (int i = 0; i < m - 1; i++) {
             pow = (pow * base) % mod;
@@ -43,6 +48,7 @@ public class RabinKarpMatcher implements StringMatcher {
             if (patHash == winHash) {
                 boolean match = true;
                 for (int j = 0; j < m; j++) {
+                    comparisons++;
                     if (text.charAt(i + j) != pattern.charAt(j)) {
                         match = false;
                         break;
@@ -50,6 +56,8 @@ public class RabinKarpMatcher implements StringMatcher {
                 }
                 if (match) {
                     result.add(i);
+                } else {
+                    spuriousHits++;
                 }
             }
             if (i + m < n) {
@@ -58,5 +66,14 @@ public class RabinKarpMatcher implements StringMatcher {
             }
         }
         return result;
+    }
+
+    @Override
+    public long getComparisons() {
+        return comparisons;
+    }
+
+    public long getSpuriousHits() {
+        return spuriousHits;
     }
 }

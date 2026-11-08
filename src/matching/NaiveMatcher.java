@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NaiveMatcher implements StringMatcher {
+    private long comparisons;
 
     @Override
     public List<Integer> search(String text, String pattern) {
+        comparisons = 0;
         List<Integer> result = new ArrayList<>();
         if (pattern.isEmpty()) {
             return result;
@@ -16,7 +18,11 @@ public class NaiveMatcher implements StringMatcher {
 
         for (int i = 0; i + m <= n; i++) {
             int j = 0;
-            while (j < m && text.charAt(i + j) == pattern.charAt(j)) {
+            while (j < m) {
+                comparisons++;
+                if (text.charAt(i + j) != pattern.charAt(j)) {
+                    break;
+                }
                 j++;
             }
             if (j == m) {
@@ -24,5 +30,10 @@ public class NaiveMatcher implements StringMatcher {
             }
         }
         return result;
+    }
+
+    @Override
+    public long getComparisons() {
+        return comparisons;
     }
 }
