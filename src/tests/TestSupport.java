@@ -20,4 +20,14 @@ public final class TestSupport {
         System.out.println();
         System.out.println(passed + " passed, " + failed + " failed");
     }
+    public static void assertThrows(String name, Runnable action) {
+        try {
+            action.run();
+            failed++;
+            System.out.println("FAIL  " + name + "  expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            passed++;
+            System.out.println("PASS  " + name);
+        }
+    }
 }

@@ -18,5 +18,6 @@ public class EditDistanceTests {
         TestSupport.assertEquals("intention / execution", 5, EditDistance.distance("intention", "execution"));
         TestSupport.assertEquals("symmetry",
                 EditDistance.distance("kitten", "sitting"), EditDistance.distance("sitting", "kitten"));
+        TestSupport.assertThrows("null second argument", () -> EditDistance.distance("A", null));
     }
 }

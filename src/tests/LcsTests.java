@@ -19,6 +19,7 @@ public class LcsTests {
         TestSupport.assertEquals("subsequence in b", true, isSubsequence(s, "BDCABA"));
         TestSupport.assertEquals("subsequence identical", "ABCDEF", LCS.subsequence("ABCDEF", "ABCDEF"));
         TestSupport.assertEquals("subsequence different", "", LCS.subsequence("AAAA", "BBBB"));
+        TestSupport.assertThrows("null first argument", () -> LCS.length(null, "A"));
     }
     private static boolean isSubsequence(String s, String t) {
         int i = 0;
@@ -29,4 +30,5 @@ public class LcsTests {
         }
         return i == s.length();
     }
+
 }

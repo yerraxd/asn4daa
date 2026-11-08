@@ -4,6 +4,9 @@ public final class LCS {
     private LCS() {}
 
     static int[][] buildTable(String a, String b) {
+        if (a == null || b == null) {
+            throw new IllegalArgumentException("strings must not be null");
+        }
         int n = a.length();
         int m = b.length();
         int[][] dp = new int[n + 1][m + 1];
