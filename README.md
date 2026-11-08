@@ -97,8 +97,7 @@ times. Each position also adds at most one failed comparison, so the total is at
   would otherwise return every index). A pattern longer than the text also returns an
   empty list. Overlapping matches are all reported.
 - Empty strings are valid input for LCS and edit distance.
-- `null` arguments throw `IllegalArgumentException`. Kasai also rejects a suffix array
-  with the wrong length or an index out of range.
+- `null`  arguments to LCS, edit distance and Kasai throw `IllegalArgumentException`. Kasai also rejects a suffix array with the wrong length or an index out of range. The matchers assume non-null input.
 - The suffix array is built by sorting suffixes with a comparison sort (worst case
   O(n² log n)), which the assignment allows. It is built before timing and is not part
   of Kasai's measured time.
@@ -160,7 +159,7 @@ case, and all of them pass.
 
 ## 5. Experimental setup
 
-Machine: `AMD Ryzen 3550H, 8Gb RAM`, Windows, OpenJDK 25.0.1.
+Machine: `AMD Ryzen 5 3550H, 8Gb RAM`, Windows, OpenJDK 25.0.1.
 
 Strings are random over `ACGT`. Each benchmark has one `Random` with seed 42, and all
 inputs are generated before any timing starts.
