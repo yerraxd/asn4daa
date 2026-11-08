@@ -7,6 +7,7 @@ public class AllTests {
         KmpLpsTests.run();
         MatcherTests.run();
         CounterTests.run();
+        SuffixTests.run();
         TestSupport.summary();
     }
 }
