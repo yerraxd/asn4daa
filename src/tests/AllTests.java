@@ -5,5 +5,6 @@ public class AllTests {
         LcsTests.run();
         TestSupport.summary();
         EditDistanceTests.run();
+        MatcherTests.run();
     }
 }
