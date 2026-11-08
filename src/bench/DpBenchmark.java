@@ -1,12 +1,15 @@
 package bench;
-
 import dp.EditDistance;
 import dp.LCS;
 import util.StringGenerator;
-
 import java.util.Locale;
 import java.util.Random;
 import java.util.function.IntSupplier;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class DpBenchmark {
     private static final long SEED = 42L;
@@ -14,7 +17,7 @@ public class DpBenchmark {
     private static final int RUNS = 5;
     private static volatile int sink;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Random rnd = new Random(SEED);
         String[] as = new String[SIZES.length];
         String[] bs = new String[SIZES.length];
@@ -40,6 +43,7 @@ public class DpBenchmark {
         }
 
         printTable(lcsMs, editMs, lcsValue, editValue);
+        writeCsv(Paths.get("results", "dp_results.csv"), lcsMs, editMs, lcsValue, editValue);
     }
 
     private static void warmUp() {
@@ -71,6 +75,18 @@ public class DpBenchmark {
             long cells = (long) (SIZES[i] + 1) * (SIZES[i] + 1);
             System.out.printf(Locale.ROOT, "%6d %12.4f %12.4f %12d %10d %10d%n",
                     SIZES[i], lcsMs[i], editMs[i], cells, lcsValue[i], editValue[i]);
+        }
+    }
+    private static void writeCsv(Path path, double[] lcsMs, double[] editMs,
+                                 int[] lcsValue, int[] editValue) throws IOException {
+        Files.createDirectories(path.getParent());
+        try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(path))) {
+            pw.println("n,lcs_ms,edit_distance_ms,table_cells,lcs_length,edit_distance");
+            for (int i = 0; i < SIZES.length; i++) {
+                long cells = (long) (SIZES[i] + 1) * (SIZES[i] + 1);
+                pw.printf(Locale.ROOT, "%d,%.4f,%.4f,%d,%d,%d%n",
+                        SIZES[i], lcsMs[i], editMs[i], cells, lcsValue[i], editValue[i]);
+            }
         }
     }
 }
