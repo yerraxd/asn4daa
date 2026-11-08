@@ -4,13 +4,14 @@ import matching.NaiveMatcher;
 import matching.StringMatcher;
 import matching.KMPMatcher;
 import java.util.Random;
+import matching.RabinKarpMatcher;
 
 import java.util.List;
 
 public class MatcherTests {
 
     static StringMatcher[] matchers() {
-        return new StringMatcher[]{new NaiveMatcher(), new KMPMatcher()};
+        return new StringMatcher[]{new NaiveMatcher(), new KMPMatcher(), new RabinKarpMatcher()};
     }
 
     private static void check(String name, String text, String pattern, List<Integer> expected) {
