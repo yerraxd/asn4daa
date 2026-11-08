@@ -3,7 +3,7 @@ package dp;
 public final class LCS {
     private LCS() {}
 
-    public static int length(String a, String b) {
+    static int[][] buildTable(String a, String b) {
         int n = a.length();
         int m = b.length();
         int[][] dp = new int[n + 1][m + 1];
@@ -17,6 +17,10 @@ public final class LCS {
                 }
             }
         }
-        return dp[n][m];
+        return dp;
+    }
+
+    public static int length(String a, String b) {
+        return buildTable(a, b)[a.length()][b.length()];
     }
 }
