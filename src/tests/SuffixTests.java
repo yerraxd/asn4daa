@@ -32,6 +32,9 @@ public class SuffixTests {
                 Arrays.toString(Kasai.buildLcp("a", SuffixArray.build("a"))));
         TestSupport.assertEquals("empty string: LCP", "[]",
                 Arrays.toString(Kasai.buildLcp("", SuffixArray.build(""))));
+        TestSupport.assertThrows("SA length mismatch", () -> Kasai.buildLcp("abc", new int[]{0, 1}));
+        TestSupport.assertThrows("SA index out of range", () -> Kasai.buildLcp("abc", new int[]{0, 1, 5}));
+        TestSupport.assertThrows("null string", () -> Kasai.buildLcp(null, new int[0]));
     }
 
 }
