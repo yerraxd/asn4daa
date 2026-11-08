@@ -160,7 +160,7 @@ case, and all of them pass.
 
 ## 5. Experimental setup
 
-Machine: `<CPU, RAM>`, Windows, OpenJDK 25.0.1.
+Machine: `AMD Ryzen 3550H, 8Gb RAM`, Windows, OpenJDK 25.0.1.
 
 Strings are random over `ACGT`. Each benchmark has one `Random` with seed 42, and all
 inputs are generated before any timing starts.
