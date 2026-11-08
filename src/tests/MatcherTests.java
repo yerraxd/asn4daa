@@ -36,6 +36,7 @@ public class MatcherTests {
         check("empty pattern", "ABC", "", List.of());
         check("empty text and empty pattern", "", "", List.of());
         check("empty text, non-empty pattern", "", "A", List.of());
+        tinyModulusCheck();
     }
     private static String randomString(Random rnd, int length, String alphabet) {
         StringBuilder sb = new StringBuilder();
@@ -61,5 +62,21 @@ public class MatcherTests {
             }
         }
         TestSupport.assertEquals("random cross-check (500 cases, alphabet AB)", true, allEqual);
+    }
+    private static void tinyModulusCheck() {
+        RabinKarpMatcher weak = new RabinKarpMatcher(3, 7);
+        TestSupport.assertEquals("RK mod 7: ABCABC / ABC", List.of(0, 3), weak.search("ABCABC", "ABC"));
+
+        Random rnd = new Random(13);
+        NaiveMatcher naive = new NaiveMatcher();
+        boolean allEqual = true;
+        for (int t = 0; t < 500; t++) {
+            String text = randomString(rnd, 1 + rnd.nextInt(80), "ABC");
+            String pattern = randomString(rnd, 1 + rnd.nextInt(6), "ABC");
+            if (!naive.search(text, pattern).equals(weak.search(text, pattern))) {
+                allEqual = false;
+            }
+        }
+        TestSupport.assertEquals("RK mod 7 (many collisions) matches naive on 500 cases", true, allEqual);
     }
 }
