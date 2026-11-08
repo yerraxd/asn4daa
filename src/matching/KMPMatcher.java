@@ -1,7 +1,9 @@
 package matching;
 
-public final class KMPMatcher {
+import java.util.ArrayList;
+import java.util.List;
 
+public class KMPMatcher implements StringMatcher {
     public static int[] buildLps(String p) {
         int m = p.length();
         int[] lps = new int[m];
@@ -21,5 +23,31 @@ public final class KMPMatcher {
             }
         }
         return lps;
+    }
+
+    @Override
+    public List<Integer> search(String text, String pattern) {
+        List<Integer> result = new ArrayList<>();
+        int n = text.length();
+        int m = pattern.length();
+        int[] lps = buildLps(pattern);
+
+        int i = 0;
+        int j = 0;
+        while (i < n) {
+            if (text.charAt(i) == pattern.charAt(j)) {
+                i++;
+                j++;
+                if (j == m) {
+                    result.add(i - m);
+                    j = lps[j - 1];
+                }
+            } else if (j > 0) {
+                j = lps[j - 1];
+            } else {
+                i++;
+            }
+        }
+        return result;
     }
 }
