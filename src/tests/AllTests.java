@@ -1,0 +1,8 @@
+package tests;
+
+public class AllTests {
+    public static void main(String[] args) {
+        LcsTests.run();
+        TestSupport.summary();
+    }
+}
