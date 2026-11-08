@@ -4,6 +4,9 @@ public final class EditDistance {
     private EditDistance() {}
 
     public static int distance(String a, String b) {
+        if (a == null || b == null) {
+            throw new IllegalArgumentException("strings must not be null");
+        }
         int n = a.length();
         int m = b.length();
         int[][] dp = new int[n + 1][m + 1];
