@@ -6,5 +6,6 @@ public class AllTests {
         TestSupport.summary();
         EditDistanceTests.run();
         MatcherTests.run();
+        KmpLpsTests.run();
     }
 }
